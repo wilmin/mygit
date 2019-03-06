@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appStore.dao.AppstoreMapper">
+  <resultMap id="BaseResultMap" type="com.appStore.entity.Appstore">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="apkpackagename" jdbcType="VARCHAR" property="apkpackagename" />
+    <result column="apkversionname" jdbcType="VARCHAR" property="apkversionname" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="online_time" jdbcType="TIMESTAMP" property="onlineTime" />
+    <result column="apksize" jdbcType="BIGINT" property="apksize" />
+    <result column="download_total" jdbcType="INTEGER" property="downloadtotal" />
+    <result column="apkdownload" jdbcType="VARCHAR" property="apkdownload" />
+    <result column="s3iconkey" jdbcType="VARCHAR" property="s3iconkey" />
+    <result column="s3appkey" jdbcType="VARCHAR" property="s3appkey" />
+    <result column="apkname" jdbcType="VARCHAR" property="apkname" />
+    <result column="apkiconsize" jdbcType="BIGINT" property="apkiconsize" />
+    <result column="apkicon" jdbcType="VARCHAR" property="apkicon" />
+    <result column="apkprofile" jdbcType="VARCHAR" property="apkprofile" />
+    <result column="apkbigicon" jdbcType="VARCHAR" property="apkbigicon" />
+    <result column="apktype" jdbcType="INTEGER" property="apktype" />
+    <result column="apkversion" jdbcType="VARCHAR" property="apkversion" />
+    <result column="apklanguage" jdbcType="VARCHAR" property="apklanguage" />
+    <result column="website" jdbcType="VARCHAR" property="website" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="privacypolicy" jdbcType="VARCHAR" property="privacypolicy" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="md5" jdbcType="VARCHAR" property="md5" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.appStore.entity.Appstore">
+    <result column="s3screenshotkey" jdbcType="LONGVARCHAR" property="s3screenshotkey" />
+    <result column="apkinfo" jdbcType="LONGVARCHAR" property="apkinfo" />
+    <result column="apkscreenshot" jdbcType="LONGVARCHAR" property="apkscreenshot" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, apkpackagename, apkversionname, update_time, online_time, apksize, download_total, 
+    apkdownload, s3iconkey, s3appkey, s3screenshotkey, apkname, apkiconsize, apkicon, 
+    apkprofile, apkscreenshot, apkbigicon, apktype, apkversion, apklanguage, website, 
+    email, privacypolicy, description, md5
+  </sql>
+  <sql id="Blob_Column_List">
+    apkinfo
+  </sql>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ begin以下为自定义sql~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- 终端商店访问apk信息 -->
+	<select id="getByAppstoreAll" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from appstore
+	</select>
+	<!-- 下载apk信息次数累计 -->
+	<update id="updateForDownloadTotal"
+		parameterType="java.lang.Integer">
+		update appstore set
+		download_total = download_total + 1
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectlastid" resultType="int">
+		select max(id) from
+		appstore;
+	</select>
+
+	<!-- web前端显示APP集合信息 -->
+	<select id="selectAllAppstoreInfoWithFilter"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from appstore
+		order by update_time desc
+	</select>
+
+	<!-- 检测是否已上传相同的apk -->
+	<select id="selectByApkInfo"
+		parameterType="com.appStore.entity.Appstore" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from appstore
+		where apkpackagename = #{apkpackagename,jdbcType=VARCHAR}
+		and apkversion = #{apkversion,jdbcType=VARCHAR}
+		and apksize =
+		#{apksize,jdbcType=BIGINT}
+		and md5 = #{md5,jdbcType=VARCHAR}
+	</select>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ end以上为自定义sql~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from appstore
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from appstore
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.appStore.entity.Appstore">
+    insert into appstore (id, apkpackagename, apkversionname, 
+      update_time, online_time, apksize, 
+      download_total, apkdownload, s3iconkey, 
+      s3appkey, s3screenshotkey, apkname, 
+      apkiconsize, apkicon, apkprofile, 
+      apkscreenshot, apkbigicon, apktype, 
+      apkversion, apklanguage, website, 
+      email, privacypolicy, description, 
+      md5, apkinfo)
+    values (#{id,jdbcType=INTEGER}, #{apkpackagename,jdbcType=VARCHAR}, #{apkversionname,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{onlineTime,jdbcType=TIMESTAMP}, #{apksize,jdbcType=BIGINT}, 
+      #{downloadtotal,jdbcType=INTEGER}, #{apkdownload,jdbcType=VARCHAR}, #{s3iconkey,jdbcType=VARCHAR}, 
+      #{s3appkey,jdbcType=VARCHAR}, #{s3screenshotkey,jdbcType=VARCHAR}, #{apkname,jdbcType=VARCHAR}, 
+      #{apkiconsize,jdbcType=BIGINT}, #{apkicon,jdbcType=VARCHAR}, #{apkprofile,jdbcType=VARCHAR}, 
+      #{apkscreenshot,jdbcType=VARCHAR}, #{apkbigicon,jdbcType=VARCHAR}, #{apktype,jdbcType=INTEGER}, 
+      #{apkversion,jdbcType=VARCHAR}, #{apklanguage,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{privacypolicy,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{md5,jdbcType=VARCHAR}, #{apkinfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.appStore.entity.Appstore">
+    insert into appstore
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="apkpackagename != null">
+        apkpackagename,
+      </if>
+      <if test="apkversionname != null">
+        apkversionname,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="onlineTime != null">
+        online_time,
+      </if>
+      <if test="apksize != null">
+        apksize,
+      </if>
+      <if test="downloadtotal != null">
+        download_total,
+      </if>
+      <if test="apkdownload != null">
+        apkdownload,
+      </if>
+      <if test="s3iconkey != null">
+        s3iconkey,
+      </if>
+      <if test="s3appkey != null">
+        s3appkey,
+      </if>
+      <if test="s3screenshotkey != null">
+        s3screenshotkey,
+      </if>
+      <if test="apkname != null">
+        apkname,
+      </if>
+      <if test="apkiconsize != null">
+        apkiconsize,
+      </if>
+      <if test="apkicon != null">
+        apkicon,
+      </if>
+      <if test="apkprofile != null">
+        apkprofile,
+      </if>
+      <if test="apkscreenshot != null">
+        apkscreenshot,
+      </if>
+      <if test="apkbigicon != null">
+        apkbigicon,
+      </if>
+      <if test="apktype != null">
+        apktype,
+      </if>
+      <if test="apkversion != null">
+        apkversion,
+      </if>
+      <if test="apklanguage != null">
+        apklanguage,
+      </if>
+      <if test="website != null">
+        website,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="privacypolicy != null">
+        privacypolicy,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="md5 != null">
+        md5,
+      </if>
+      <if test="apkinfo != null">
+        apkinfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="apkpackagename != null">
+        #{apkpackagename,jdbcType=VARCHAR},
+      </if>
+      <if test="apkversionname != null">
+        #{apkversionname,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onlineTime != null">
+        #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apksize != null">
+        #{apksize,jdbcType=BIGINT},
+      </if>
+      <if test="downloadtotal != null">
+        #{downloadtotal,jdbcType=INTEGER},
+      </if>
+      <if test="apkdownload != null">
+        #{apkdownload,jdbcType=VARCHAR},
+      </if>
+      <if test="s3iconkey != null">
+        #{s3iconkey,jdbcType=VARCHAR},
+      </if>
+      <if test="s3appkey != null">
+        #{s3appkey,jdbcType=VARCHAR},
+      </if>
+      <if test="s3screenshotkey != null">
+        #{s3screenshotkey,jdbcType=VARCHAR},
+      </if>
+      <if test="apkname != null">
+        #{apkname,jdbcType=VARCHAR},
+      </if>
+      <if test="apkiconsize != null">
+        #{apkiconsize,jdbcType=BIGINT},
+      </if>
+      <if test="apkicon != null">
+        #{apkicon,jdbcType=VARCHAR},
+      </if>
+      <if test="apkprofile != null">
+        #{apkprofile,jdbcType=VARCHAR},
+      </if>
+      <if test="apkscreenshot != null">
+        #{apkscreenshot,jdbcType=VARCHAR},
+      </if>
+      <if test="apkbigicon != null">
+        #{apkbigicon,jdbcType=VARCHAR},
+      </if>
+      <if test="apktype != null">
+        #{apktype,jdbcType=INTEGER},
+      </if>
+      <if test="apkversion != null">
+        #{apkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="apklanguage != null">
+        #{apklanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="privacypolicy != null">
+        #{privacypolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null">
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="apkinfo != null">
+        #{apkinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.appStore.entity.Appstore">
+    update appstore
+    <set>
+      <if test="apkpackagename != null">
+        apkpackagename = #{apkpackagename,jdbcType=VARCHAR},
+      </if>
+      <if test="apkversionname != null">
+        apkversionname = #{apkversionname,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onlineTime != null">
+        online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apksize != null">
+        apksize = #{apksize,jdbcType=BIGINT},
+      </if>
+      <if test="downloadtotal != null">
+        download_total = #{downloadtotal,jdbcType=INTEGER},
+      </if>
+      <if test="apkdownload != null">
+        apkdownload = #{apkdownload,jdbcType=VARCHAR},
+      </if>
+      <if test="s3iconkey != null">
+        s3iconkey = #{s3iconkey,jdbcType=VARCHAR},
+      </if>
+      <if test="s3appkey != null">
+        s3appkey = #{s3appkey,jdbcType=VARCHAR},
+      </if>
+      <if test="s3screenshotkey != null">
+        s3screenshotkey = #{s3screenshotkey,jdbcType=VARCHAR},
+      </if>
+      <if test="apkname != null">
+        apkname = #{apkname,jdbcType=VARCHAR},
+      </if>
+      <if test="apkiconsize != null">
+        apkiconsize = #{apkiconsize,jdbcType=BIGINT},
+      </if>
+      <if test="apkicon != null">
+        apkicon = #{apkicon,jdbcType=VARCHAR},
+      </if>
+      <if test="apkprofile != null">
+        apkprofile = #{apkprofile,jdbcType=VARCHAR},
+      </if>
+      <if test="apkscreenshot != null">
+        apkscreenshot = #{apkscreenshot,jdbcType=VARCHAR},
+      </if>
+      <if test="apkbigicon != null">
+        apkbigicon = #{apkbigicon,jdbcType=VARCHAR},
+      </if>
+      <if test="apktype != null">
+        apktype = #{apktype,jdbcType=INTEGER},
+      </if>
+      <if test="apkversion != null">
+        apkversion = #{apkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="apklanguage != null">
+        apklanguage = #{apklanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="privacypolicy != null">
+        privacypolicy = #{privacypolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null">
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="apkinfo != null">
+        apkinfo = #{apkinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.appStore.entity.Appstore">
+    update appstore
+    set apkpackagename = #{apkpackagename,jdbcType=VARCHAR},
+      apkversionname = #{apkversionname,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      apksize = #{apksize,jdbcType=BIGINT},
+      download_total = #{downloadtotal,jdbcType=INTEGER},
+      apkdownload = #{apkdownload,jdbcType=VARCHAR},
+      s3iconkey = #{s3iconkey,jdbcType=VARCHAR},
+      s3appkey = #{s3appkey,jdbcType=VARCHAR},
+      s3screenshotkey = #{s3screenshotkey,jdbcType=VARCHAR},
+      apkname = #{apkname,jdbcType=VARCHAR},
+      apkiconsize = #{apkiconsize,jdbcType=BIGINT},
+      apkicon = #{apkicon,jdbcType=VARCHAR},
+      apkprofile = #{apkprofile,jdbcType=VARCHAR},
+      apkscreenshot = #{apkscreenshot,jdbcType=VARCHAR},
+      apkbigicon = #{apkbigicon,jdbcType=VARCHAR},
+      apktype = #{apktype,jdbcType=INTEGER},
+      apkversion = #{apkversion,jdbcType=VARCHAR},
+      apklanguage = #{apklanguage,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      privacypolicy = #{privacypolicy,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      md5 = #{md5,jdbcType=VARCHAR},
+      apkinfo = #{apkinfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.appStore.entity.Appstore">
+    update appstore
+    set apkpackagename = #{apkpackagename,jdbcType=VARCHAR},
+      apkversionname = #{apkversionname,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      apksize = #{apksize,jdbcType=BIGINT},
+      download_total = #{downloadtotal,jdbcType=INTEGER},
+      apkdownload = #{apkdownload,jdbcType=VARCHAR},
+      s3iconkey = #{s3iconkey,jdbcType=VARCHAR},
+      s3appkey = #{s3appkey,jdbcType=VARCHAR},
+      s3screenshotkey = #{s3screenshotkey,jdbcType=VARCHAR},
+      apkname = #{apkname,jdbcType=VARCHAR},
+      apkiconsize = #{apkiconsize,jdbcType=BIGINT},
+      apkicon = #{apkicon,jdbcType=VARCHAR},
+      apkprofile = #{apkprofile,jdbcType=VARCHAR},
+      apkscreenshot = #{apkscreenshot,jdbcType=VARCHAR},
+      apkbigicon = #{apkbigicon,jdbcType=VARCHAR},
+      apktype = #{apktype,jdbcType=INTEGER},
+      apkversion = #{apkversion,jdbcType=VARCHAR},
+      apklanguage = #{apklanguage,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      privacypolicy = #{privacypolicy,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      md5 = #{md5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

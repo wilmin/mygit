@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appStore.dao.AppUpgradeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.appStore.entity.AppUpgrade">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="model" jdbcType="VARCHAR" property="model" />
+		<result column="android" jdbcType="VARCHAR" property="android" />
+		<result column="customer" jdbcType="VARCHAR"
+			property="customer" />
+		<result column="apkidlist" jdbcType="VARCHAR"
+			property="apkidlist" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="description" jdbcType="VARCHAR"
+			property="description" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, model, android, customer, apkidlist, type, status, description
+	</sql>
+
+	<!-- ~~~~~~~~~~~~~~~begin自定义sql~~~~~~~~~~~~~~~ -->
+	<!-- 查询所有的机型版本信息 -->
+	<select id="getAppUpgradeAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from app_upgrade
+	</select>
+
+	<!-- APP商城推送查询APP集合 -->
+	<!-- 根据机型编号查询关联商城配置表，拿到商城配置表apkid，再拿apkid到APP升级表编号查询apkid结合列 -->
+	<select id="selectByStoreApkIdList"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from app_upgrade
+		where type = 1
+		and id = (
+		select app_upgrade_id
+		from apk_store_configuration
+		where model_version_id = #{id,jdbcType=INTEGER}
+		)
+	</select>
+	<!-- 商城默认推送APP安装列表 -->
+	<select id="selectByDefaultStoreApkList"
+		parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from app_upgrade
+		where type = 1
+		and android = #{android,jdbcType=VARCHAR}
+	</select>
+
+	<!-- APP商城配置列表， 商城列表下拉框选项 -->
+	<select id="selectByStoreApkList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from app_upgrade
+		where type = 1
+	</select>
+
+	<!-- 自动、静默配置APP下拉框选项 -->
+	<select id="selectByAutoStaticApkList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from app_upgrade
+		where type = 0
+	</select>
+
+	<!-- 通过名称查询升级apk信息 -->
+	<select id="selectByNameApkList"
+		parameterType="com.appStore.entity.AppUpgrade"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from app_upgrade
+		where type = #{type,jdbcType=INTEGER}
+		and customer = #{customer,jdbcType=VARCHAR}
+
+	</select>
+
+	<!-- ~~~~~~~~~~~~~~~end自定义sql~~~~~~~~~~~~~~~ -->
+
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from app_upgrade
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from app_upgrade
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.appStore.entity.AppUpgrade">
+		insert into app_upgrade (id, name, model,
+		android, customer, apkidlist,
+		type, status, description
+		)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{model,jdbcType=VARCHAR},
+		#{android,jdbcType=VARCHAR}, #{customer,jdbcType=VARCHAR}, #{apkidlist,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+		#{description,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.appStore.entity.AppUpgrade">
+		insert into app_upgrade
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="model != null">
+				model,
+			</if>
+			<if test="android != null">
+				android,
+			</if>
+			<if test="customer != null">
+				customer,
+			</if>
+			<if test="apkidlist != null">
+				apkidlist,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="android != null">
+				#{android,jdbcType=VARCHAR},
+			</if>
+			<if test="customer != null">
+				#{customer,jdbcType=VARCHAR},
+			</if>
+			<if test="apkidlist != null">
+				#{apkidlist,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.appStore.entity.AppUpgrade">
+		update app_upgrade
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				model = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="android != null">
+				android = #{android,jdbcType=VARCHAR},
+			</if>
+			<if test="customer != null">
+				customer = #{customer,jdbcType=VARCHAR},
+			</if>
+			<if test="apkidlist != null">
+				apkidlist = #{apkidlist,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.appStore.entity.AppUpgrade">
+		update app_upgrade
+		set name = #{name,jdbcType=VARCHAR},
+		model = #{model,jdbcType=VARCHAR},
+		android = #{android,jdbcType=VARCHAR},
+		customer = #{customer,jdbcType=VARCHAR},
+		apkidlist = #{apkidlist,jdbcType=VARCHAR},
+		type = #{type,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		description = #{description,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

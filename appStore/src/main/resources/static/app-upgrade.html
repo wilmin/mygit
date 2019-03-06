@@ -1,0 +1,216 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>APP Upgrade Management</title>
+
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<link href="static/css/base.css" rel="stylesheet">
+<link href="static/css/layer.css" rel="stylesheet">
+<link href="static/css/font-awesome.css" rel="stylesheet">
+<link href="static/css/advertisement.css" rel="stylesheet">
+<link href="static/css/bootstrap-table.css" rel="stylesheet">
+<link href="static/css/bootstrap-select.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<div id="header"></div>
+		<div class="row" id="content">
+			<div class="col-md-2">
+				<nav id="sidebar" class="">
+					<!--Loading sidebar-->
+				</nav>
+			</div>
+
+			<div class="col-md-10">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active"><a id="linetwork" href="#getAPPUpgrade"
+						data-toggle="tab">APP Upgrade</a></li>
+				</ul>
+				<br />
+				<div id="myTabContent" class="tab-content">
+					<!-- apk升级推送集合信息 -->
+					<div class="tab-pane fade in active" id="getAPPUpgrade">
+						<div id="div_netword">
+							<button id="add_APP_Upgrade_Button" class="btn btn-success"
+								type="button" data-toggle="modal" data-target="#addUpgradeModel">
+								<span class="glyphicon glyphicon-plus"></span>Add
+							</button>
+							<table id="get_APP_Upgrade">
+								<thead>
+									<tr>
+										<!-- <th data-field="id" data-visible="false">id</th> -->
+										<th data-field="name">Name</th>
+										<th data-field="android">Android</th>
+										<th data-field="customer" data-visible="false">Country</th>
+										<th data-formatter="upgradeOperationFun"
+											data-events="upgradeEvents">Operations</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div id="footer">Copyright © 2018-2020 All Rights Reserved.</div>
+
+	<!-- 编辑apk升级推送集合信息 -->
+	<!--begin edit APP-Upgrade-Modal -->
+	<div class="modal" id="editUpgradeModel" tabindex="-1" role="dialog"
+		aria-labelledby="editUpgradeTitle">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close closeBtn" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="editUpgradeTitle">Edit APP Upgrade</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="editUpgrade_name" class="col-sm-2 control-label">Name:</label>
+							<div class="col-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" id="editUpgrade_Name"
+										placeholder="Name"> <span
+										class="red-star input-group-addon"></span> <input type="text"
+										class="form-control" style="display: none" id="editUpgrade_id">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label> <input id="checkEdit" type="checkbox"
+									value="checkEditAndroid">APP Store
+								</label>
+								&nbsp;
+								<label> <input id="checkEditUpgrade" type="checkbox"
+									value="-1">APP Upgrade
+								</label>
+							</div>
+						</div>
+						<br /> <br />
+						<div id="checkEditAndroid" class="form-group displayNone">
+							<label for="editUpgrade_android" class="col-sm-2 control-label">Android:</label>
+							<div class="col-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control"
+										id="editUpgrade_Android" placeholder="Android"> <span
+										class="red-star input-group-addon"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="edit_description" class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-10">
+								<textarea id="edit_Description" class="form-control" rows="3"
+									placeholder="Upgrade description"></textarea>
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"
+						id="editUpgrade__Submit">Submit</button>
+					<button type="button" class="btn btn-default closeBtn"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End edit APP-Upgrade-Modal -->
+
+	<!-- 添加apk升级推送的信息集合 -->
+	<!-- begin add APP-Upgrade-Modal -->
+	<div class="modal" id="addUpgradeModel" tabindex="-1" role="dialog"
+		aria-labelledby="editProductTitle">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close closeBtn" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="addUpgradeTitle">Add APP Upgrade</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="addUpgrade_name" class="col-sm-2 control-label">Name:</label>
+							<div class="col-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" id="addUpgrade_Name"
+										placeholder="Name"> <span
+										class="red-star input-group-addon"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label> <input id="checkAdd" type="checkbox"
+									value="checkAddAndroid">APP Store
+								</label>&nbsp;
+								<label> <input id="checkAddUpgrade" type="checkbox"
+									value="-1">APP Upgrade
+								</label>
+							</div>
+						</div>
+						<br /> <br />
+						<div id="checkAddAndroid" class="form-group displayNone">
+							<label for="addUpgrade_android" class="col-sm-2 control-label">Android:</label>
+							<div class="col-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" id="addUpgrade_Android"
+										placeholder="Android"> <span
+										class="red-star input-group-addon"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="add_description" class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-10">
+								<textarea id="add_Description" class="form-control" rows="3"
+									placeholder="Upgrade description"></textarea>
+							</div>
+						</div>
+
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"
+						id="addUpgrade_Submit" onclick="submit_addUpgradeClick()">Submit</button>
+					<button type="button" class="btn btn-default closeBtn"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End add APP-Upgrade-Modal -->
+
+	<script src="static/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="static/js/common.js" type="text/javascript"></script>
+	<script src="static/js/device.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap-table.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap-table-export.js" type="text/javascript"></script>
+	<script src="static/js/tableExport.js" type="text/javascript"></script>
+	<script src="static/js/jquery.base64.js" type="text/javascript"></script>
+	<script src="static/js/layer.js" type="text/javascript"></script>
+</body>
+</html>
+

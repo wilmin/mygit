@@ -1,0 +1,75 @@
+/********************************************
+* The base sheetstyle
+*
+*
+*
+*********************************************/
+@font-face {
+	font-family: galanoFont;
+	src: url('../fonts/GALANO-GROTESQUE-ALT-MEDIUM.otf');
+}
+
+html, body {
+	font-family: galanoFont;
+	min-height: 100%;
+	background-size: 100%;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th {
+	vertical-align: middle;
+}
+
+.container {
+	border: 1px solid #ddd;
+}
+
+.centerInfo {
+	margin: auto;
+	margin-left: 10%;
+	font-size: medium;
+}
+
+.col-md-10 {
+	padding: 10px;
+	border-left: 1px solid #ddd;
+	min-height: 85%;
+}
+
+li {
+	list-style: none
+}
+
+h3.h3filter {
+	text-align: center;
+	width: 100%;
+	border-bottom: 1px solid black;
+}
+
+.red-star.input-group-addon {
+	background-color: white;
+	border: none;
+	color: red;
+}
+
+.displayNone {
+	display: none;
+}
+
+.modal .form-horizontal .control-label {
+	text-align: left;
+}
+
+.col-md-st {
+	padding: 10px;
+	border-left: 1px solid #ddd;
+	min-height: 85%;
+}
+
+button[permission] {
+	display: none;
+}
+
+body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+	font-family: Microsoft YaHei, 'MingLiU', Tahoma, Helvetica, Arial,
+		"\5b8b\4f53", sans-serif;
+}

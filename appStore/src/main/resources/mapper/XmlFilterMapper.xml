@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appStore.dao.XmlFilterMapper">
+  <resultMap id="BaseResultMap" type="com.appStore.entity.XmlFilter">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="beginmac" jdbcType="VARCHAR" property="beginmac" />
+    <result column="endmac" jdbcType="VARCHAR" property="endmac" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, beginmac, endmac, status
+  </sql>
+  
+   <!-- ~~~~~~~~~~~~~begin自定义sql语句~~~~~~~~~~~~~ -->
+  <!-- 查询OTA升级的Mac过滤拦截的信息  -->
+  <select id="getByXmlFilterList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xmlfilter
+  </select>
+  
+  <!-- ~~~~~~~~~~~~~end自定义sql语句~~~~~~~~~~~~~ -->
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xmlfilter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xmlfilter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.appStore.entity.XmlFilter">
+    insert into xmlfilter (id, beginmac, endmac, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{beginmac,jdbcType=VARCHAR}, #{endmac,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.appStore.entity.XmlFilter">
+    insert into xmlfilter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="beginmac != null">
+        beginmac,
+      </if>
+      <if test="endmac != null">
+        endmac,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="beginmac != null">
+        #{beginmac,jdbcType=VARCHAR},
+      </if>
+      <if test="endmac != null">
+        #{endmac,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.appStore.entity.XmlFilter">
+    update xmlfilter
+    <set>
+      <if test="beginmac != null">
+        beginmac = #{beginmac,jdbcType=VARCHAR},
+      </if>
+      <if test="endmac != null">
+        endmac = #{endmac,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.appStore.entity.XmlFilter">
+    update xmlfilter
+    set beginmac = #{beginmac,jdbcType=VARCHAR},
+      endmac = #{endmac,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

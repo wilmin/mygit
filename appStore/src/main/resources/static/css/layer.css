@@ -1,0 +1,72 @@
+/********************************************
+* The layer sheetstyle
+* include "header" "sidebar" "footer"
+*
+*
+*********************************************/
+#header {
+	border-bottom: 1px solid #ddd;
+	text-align: center;
+}
+#sidebar {
+	margin-left: -15px;
+	margin-right: -15px;
+  height: 85%;
+  overflow-y: auto;
+  
+  color: black;
+}
+#sidebar a {
+  color: black;
+}
+#sidebar a.nav-header {
+  font-size: 15px;
+}
+#sidebar li.active a {
+  color: #5CACEE;
+  font-weight: bold;
+}
+#sidebar .nav>li>a:hover {
+  text-decoration: none;
+  color:#5CACEE;
+  color: black;
+}
+#sidebar .nav>li>a:focus {
+	color: black;
+	background: none;
+}
+#footer {
+	padding-top: 10px;
+	text-align: center;
+	height: 35px;
+	font-size: 14px;
+}
+
+#sidebar_setting {
+	margin-left: -15px;
+	margin-right: -15px;
+  height: 85%;
+  overflow-y: auto;
+  
+  color: black;
+}
+#sidebar_setting a {
+  color: black;
+}
+#sidebar_setting a.nav-header {
+  font-size: 15px;
+}
+#sidebar_setting li.active a {
+  color: #5CACEE;
+  font-weight: bold;
+}
+#sidebar_setting .nav>li>a:hover {
+  text-decoration: none;
+  color:#5CACEE;
+  color: black;
+}
+#sidebar_setting .nav>li>a:focus {
+	color: black;
+	background: none;
+}
+

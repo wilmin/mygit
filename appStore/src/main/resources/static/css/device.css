@@ -1,0 +1,21 @@
+#statisticTable {
+	margin: 0;
+	margin-top: 0px;
+	width: 600px;
+	text-align: center;
+}
+.table {
+	width: initial;
+	margin: auto;
+	
+}
+.table>tbody>tr>td {
+	border: none;
+}
+td[colspan="2"] {
+	position: relative;
+	left: 25%;
+}
+#boxInfo {
+	text-align: center;
+}

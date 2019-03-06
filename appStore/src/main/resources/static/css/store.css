@@ -1,0 +1,17 @@
+/********** patch-add.html *********/
+
+/********** END patch-add.html *********/
+/********** patch-detail.html *********/
+#edit {
+	margin: auto;
+	margin-left: 20%;
+	display: block;
+}
+#filterTable {
+	text-align: center;
+}
+/********** END patch-detail.html *********/
+
+#back {
+	margin-bottom: 20px;
+}

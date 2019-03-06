@@ -1,0 +1,108 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>APP Upgrade Management</title>
+
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/css/base.css" rel="stylesheet">
+  <link href="static/css/layer.css" rel="stylesheet">
+  <link href="static/css/font-awesome.css" rel="stylesheet">
+  <link href="static/css/store.css" rel="stylesheet">
+  <link href="static/css/bootstrap-table.css" rel="stylesheet">
+  <link href="static/css/bootstrap-select.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+    <div class="row" id="content">
+      <div class="col-md-2">
+        <nav id="sidebar" class="">
+          <!--Loading sidebar-->
+        </nav>
+      </div>
+      <div class="col-md-10">
+        <button id="back" class="btn btn-default" type="button">back</button>
+        <table id="apkNameInfoTable" class="table table-bordered">
+          <tr>
+            <th>Name</th>
+            <th>AndroidVersion</th>
+            <!-- <th>Customer</th> -->
+          </tr>
+        </table>
+        <h3>Apk Upgrade List</h3>
+        <table id="apkFilterTable" class="table table-bordered table-condensed">
+          <tr>
+            <td>Num No.</td>
+            <td>AppName</td>
+            <td>PackageName</td>
+            <td>VersionCode</td>
+            <td>VersionName</td>
+            <td>Operation</td>
+          </tr>
+        </table>
+        <button class="btn btn-success" id="addNewFilter" type="button" data-toggle="modal" data-target="#addApkUpgradeFilterModal"><span class="glyphicon glyphicon-plus"></span>New Apk</button>
+        <div class="centerInfo" id="versionInfo">
+          <h3>Description:<span id="desc"></span></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Copyright © 2018-2020 All Rights Reserved.
+  </div>
+  <div class="modal" id="addApkUpgradeFilterModal" tabindex="-1" role="dialog" aria-labelledby="addFilterTitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addFilterTitle">Add Apk Upgrade</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+          	<div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input id="checkAllApk" type="checkbox" >All Apk
+                </label>
+              </div>
+            </div>
+              <br/>
+              <br/>
+            <div class="filterForm">
+              <!-- 未加入到自动配置的所有apk信息 -->
+              <div class="form-group">
+                <label for="type" class="col-sm-2 control-label">ApkName：</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                  <select id="selectApkNameModel" class="selectpicker">
+                  	<option value="0">Please Select!</option>
+                  </select>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="mappingid" id="mappingid" value="">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="addAPPUpgradeBtn">Add</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+  <!-- <script src="js/common.js" type="text/javascript"></script> -->
+	<script src="static/js/store.js" type="text/javascript"></script>
+	<script src="static/js/app-upgrade-detail.js" type="text/javascript"></script>
+	<script src="static/js/layer.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap-table.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap-table-export.js" type="text/javascript"></script>
+  	<script src="static/js/common.js" type="text/javascript"></script>
+</body>
+</html>
+

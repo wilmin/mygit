@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appStore.dao.ModelVersionMapper">
+	<resultMap id="BaseResultMap"
+		type="com.appStore.entity.ModelVersion">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="model" jdbcType="VARCHAR" property="model" />
+		<result column="device" jdbcType="VARCHAR" property="device" />
+		<result column="android" jdbcType="VARCHAR" property="android" />
+		<result column="customer" jdbcType="VARCHAR"
+			property="customer" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="other" jdbcType="VARCHAR" property="other" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, model, device, android, customer, status, other
+	</sql>
+
+	<!-- ~~~~~~~~~~~~~~~begin自定义sql~~~~~~~~~~~~~~~ -->
+	<!-- 查询所有的机型版本信息 -->
+	<select id="selectByAllModelVersion" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from modelversion
+	</select>
+
+	<!-- 安机型版本客户查询 -->
+	<select id="selectByModelVersionStatus"
+		parameterType="com.appStore.entity.ModelVersion"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from modelversion where status = 1
+		and model = #{model,jdbcType=VARCHAR}
+		and android = #{android,jdbcType=VARCHAR}
+		and customer = #{customer,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 通过的机型版本关联编号删除自动配置信息 -->
+	<delete id="deleteByAutoModelVersionId"
+		parameterType="java.lang.Integer">
+		delete from apk_automatic_configuration
+		where model_version_id = #{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 通过的机型版本关联编号删除静默安装信息 -->
+	<delete id="deleteByStaticModelVersionId"
+		parameterType="java.lang.Integer">
+		delete from apk_static_configuration
+		where model_version_id = #{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 通过的机型版本关联编号删除商城APP信息 -->
+	<delete id="deleteByStoreModelVersionId"
+		parameterType="java.lang.Integer">
+		delete from apk_store_configuration
+		where
+		model_version_id = #{id,jdbcType=INTEGER}
+	</delete>
+	<!-- ~~~~~~~~~~~~~~~end自定义sql~~~~~~~~~~~~~~~ -->
+
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from modelversion
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from modelversion
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.appStore.entity.ModelVersion">
+		insert into modelversion (id, model, device,
+		android, customer, status,
+		other)
+		values (#{id,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR},
+		#{device,jdbcType=VARCHAR},
+		#{android,jdbcType=VARCHAR}, #{customer,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+		#{other,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.appStore.entity.ModelVersion">
+		insert into modelversion
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="model != null">
+				model,
+			</if>
+			<if test="device != null">
+				device,
+			</if>
+			<if test="android != null">
+				android,
+			</if>
+			<if test="customer != null">
+				customer,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="other != null">
+				other,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				#{device,jdbcType=VARCHAR},
+			</if>
+			<if test="android != null">
+				#{android,jdbcType=VARCHAR},
+			</if>
+			<if test="customer != null">
+				#{customer,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="other != null">
+				#{other,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.appStore.entity.ModelVersion">
+		update modelversion
+		<set>
+			<if test="model != null">
+				model = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				device = #{device,jdbcType=VARCHAR},
+			</if>
+			<if test="android != null">
+				android = #{android,jdbcType=VARCHAR},
+			</if>
+			<if test="customer != null">
+				customer = #{customer,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="other != null">
+				other = #{other,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.appStore.entity.ModelVersion">
+		update modelversion
+		set model = #{model,jdbcType=VARCHAR},
+		device = #{device,jdbcType=VARCHAR},
+		android = #{android,jdbcType=VARCHAR},
+		customer = #{customer,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER},
+		other = #{other,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

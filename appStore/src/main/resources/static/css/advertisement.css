@@ -1,0 +1,21 @@
+/********** advertisement-add.html *********/
+
+/********** END advertisement-add.html *********/
+/********** advertisement-detail.html *********/
+#edit {
+	margin: auto;
+	margin-left: 20%;
+	display: block;
+}
+#filterTable {
+	text-align: center;
+}
+/********** END advertisement-detail.html *********/
+
+#back {
+	margin-bottom: 20px;
+}
+input.selectFilter[type="checkbox"]{
+	width: 17px;
+	height: 100%;
+}

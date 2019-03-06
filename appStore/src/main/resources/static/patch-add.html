@@ -1,0 +1,136 @@
+<!DOCTYPE html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>PATCH</title>
+
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<link href="static/css/base.css" rel="stylesheet">
+<link href="static/css/layer.css" rel="stylesheet">
+<link href="static/css/patch.css" rel="stylesheet">
+<link href="static/css/font-awesome.css" rel="stylesheet">
+<link href="static/css/bootstrap-select.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+		<div class="row" id="content">
+			<div class="col-md-2">
+				<nav id="sidebar" class="">
+					<!--Loading sidebar-->
+				</nav>
+			</div>
+			<div class="col-md-10">
+				<button id="back" class="btn btn-default" type="button">back</button>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="updateFile" class="col-sm-2 control-label">Upload
+							File</label>
+						<div class="col-sm-10">
+							<button class="btn btn-primary btn-sm" id="activeUpload"
+								data-toggle="modal" type="button" value=""
+								data-target="uploadModal">Upload File</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="addOTA_device" class="col-sm-2 control-label">Device</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input type="text" class="form-control" id="addOTA_Device"
+									placeholder="Device"> <span
+									class="red-star input-group-addon">*</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="addOTA_description" class="col-sm-2 control-label">Android</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input type="text" class="form-control" id="addOTA_Android"
+									placeholder="Android"> <span
+									class="red-star input-group-addon">*</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="fileVersion" class="col-sm-2 control-label">Firmware</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input type="text" class="form-control" id="fileVersion"
+									placeholder="File Version"> <span
+									class="red-star input-group-addon">*</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-10">
+							<textarea id="description" class="form-control" rows="3"
+								placeholder="Update description"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button id="submit" class="btn btn-default">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal modelModal" id="uploadModal" tabindex="-1"
+		role="dialog" aria-labelledby="">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close closeBtn" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Upload file</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group" id="passwordDiv">
+							<div class="col-sm-10">
+								<div class="input-group">
+									<label>Select Upload File:</label> <input class="form-control"
+										type="file" id="uploadFile">
+								</div>
+							</div>
+						</div>
+						<div class="progress progress-striped active"
+							style="display: none">
+							<div id="progressBar" class="progress-bar progress-bar-info"
+								role="progressbar" aria-valuemin="0" aria-valuenow="0"
+								aria-valuemax="100" style="width: 0%"></div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-10">
+								<div class="input-group">
+									<input id="btnUpload" type="button" name="submit"
+										class="btn btn-success" value="Upload" /> <input
+										id="alreadyUpload" type="text" value="0" style="display: none" />
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">Copyright © 2008-2016 All Rights Reserved.</div>
+	<script src="static/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="static/js/common.js" type="text/javascript"></script>
+	<script src="static/js/layer.js" type="text/javascript"></script>
+	<script src="static/js/patch.js" type="text/javascript"></script>
+</body>
+</html>
+

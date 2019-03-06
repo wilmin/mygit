@@ -1,0 +1,178 @@
+/* CSS Document */
+BODY {FONT-SIZE: 12px; COLOR: #333333;   MARGIN: 0px auto; padding:0px; BACKGROUND-COLOR: #f5f5f5; font-family:Verdana,Arial,Tahoma;}
+A {COLOR: #646668;TEXT-DECORATION: none}
+A:hover {COLOR: #C64F42;TEXT-DECORATION: underline}
+UL {LIST-STYLE-TYPE: none; margin:0px; padding:0px;}
+FORM {margin:0px; padding:0px;}
+IMG {border:0px; margin:0px; padding:0px;}
+P {margin:0px; padding:0px;}
+DIV {margin:0px; padding:0px;}
+.clear{ clear:both}
+
+/*index excel*/
+#index_top {margin:0 auto; background-image:url(../images/main/topbg.jpg); height:31px; line-height:31px; width: 100%; color:#666666; }
+.index_topbg{ width:960px; margin:0 auto; text-align:right;}
+.index_topbg .zuo { width:350px; float:left; text-align:left;}
+.index_topbg .zhong { width:470px; float:left; line-height:16px;}
+
+#index_head{margin:0 auto; width:100%; padding:0px; }
+.index_headbody { width:960px; margin:0 auto; padding:3px 0px 7px 0px; height:72px;}
+.index_headleft {width:240px; padding:0px 0px 0px 0px; float:left; height:70px;}
+.index_headright { margin:20px 0px 0px 0px; width:580px; padding:0px 0px; height:50px;  float:right; }
+#index_main{margin:10px auto; width:960px; padding:0px; overflow:hidden;}
+.index_mainleft {width:220px; float:left;}
+.index_mainright {width:730px; float:right;}
+.index_wzjs1 {line-height:26px; text-align:left; text-indent:2em; font-size:14px; border-bottom:1px #CCCCCC dashed; }
+
+.index_wzjs2 {line-height:19px; text-align:left; text-indent:2em; font-size:12px;color: #757575;}
+
+.index_leftbody {border: #dcdcdc 1px solid; width: 218px; background-color: #FFFFFF; text-align: left; margin: 6px 0 5px 0; overflow: hidden;}
+.index_leftyl ul{ padding:5px 3px 5px 8px; height:auto;overflow:hidden;}
+.index_leftyl li{ float:left; width:205px; height:24px; line-height:24px;text-indent: 10px;background: url(/images/main/icobg_1.png) no-repeat left -388px; overflow:hidden;}
+.index_leftyl p { line-height:23px; padding:7px;  font-size:12px;}
+
+.index_leftll ul { padding:5px; height:auto; overflow:hidden;}
+.index_leftll li {float:left; width:103px; height:26px; line-height:26px;text-indent: 10px;background: url(/images/main/icobg_1.png) no-repeat left -388px; overflow:hidden;}
+
+.index_lefttp ul { padding:6px 6px 0px 6px; height:auto;overflow:hidden;}
+.index_lefttp li {padding:2px 0px 7px 0px;float:left; width:206px; height:auto; line-height:21px; text-align:center; border-bottom:1px #CCCCCC dashed; margin-bottom:6px;}
+.index_lefttp img { border:1px #CCCCCC solid; padding:2px; }
+
+.index_qqqun {width: 200px; background-color: #FFFFFF; text-align: left; margin: 12px 10px 12px 10px; overflow: hidden;}
+
+.index_menu {width:100%; margin:0 auto; background-color: #3fb118; height: 32px; line-height: 32px; border-bottom:2px #289613 solid;}
+.index_menu ul { width:960px; margin:0 auto;}
+.index_menu li {width: 110px; float: left; margin: 0 2px 0 0; font-size: 14px;  color: #FFFFFF;}
+.index_menu li a {display: block; color: #FFFFFF;}
+.index_menu li a:hover { background-image:none; background-color:#289613; text-decoration:none;}
+.index_menu .mr {background-color:#289613;}
+
+
+
+/*top excel*/
+#top{margin:0 auto;background-image:url(../images/main/topbg.jpg);height:31px;line-height:31px;width: 730px;color:#666666;}
+.topbg{width:720px;margin:0 auto;text-align:left}
+.topbg span{float:right;width:200px;text-align:right}
+
+#head{margin:0 auto;width:730px;padding:0px}
+.logo{margin: 0 auto; padding:13px 0px 3px 0px; text-align:center;}
+.logo img { border:0px;}
+.logokjj {width:265px;margin: 0 auto; padding:13px 0px 3px 0px;}
+.logokjj img { border:0px;}
+.topso {margin:12px auto 0px auto; width:320px; padding-left:50px;  height:39px;  }
+.topfx { margin:3px auto 0px auto; width:470px; padding:0px 130px; height:28px; overflow:hidden; }
+
+
+#main{margin:0 auto;width:930px;padding:0px;overflow:hidden;}
+.maindiv {margin:10px 0 0 0;}
+.mainbody{ border:#dcdcdc 1px solid; padding:0px; width:928px; background-color:#FFFFFF; margin:6px 0; overflow:hidden;}
+.mainbody p{ padding:5px 0; margin:0px;}
+.title{ height:30px;line-height:30px;text-align:left;font-size:14px;padding:0 10px;color:#606060;background-image:url(../images/main/titlebg.jpg);font-weight:bold}
+.title span{ float:right; color:#999; font-size:12px;font-weight:normal;}
+.title .new {font-size:12px; font-weight:normal; margin-left:10px;}
+
+.weizhidh {font-size:12px; font-weight:normal;}
+.kuang{ margin:0 auto; padding:10px; text-align:center}
+
+.fanyilist { padding:5px 8px 5px 8px;}
+.fanyilist ul{ padding:0px 0px; margin:0px;}
+.fanyilist ul li{font-size:12px;width:230px;float:left; height:24px; line-height:24px;text-align:left; padding-right:7px; overflow:hidden;}
+.fanyilist ul li a{text-decoration:none;color:#4B4B4B;}
+.fanyilist ul li a:hover{text-decoration:underline;color:#C64F42;}
+
+.bowen{ text-align:center;padding:10px; margin:0px;}
+.bowen ul{ margin:0 0 0px 0; overflow:hidden;}
+.bowen ul li{float:left; width:330px; text-align:left; height:22px; line-height:22px; overflow:hidden; padding-right:20px; }
+.bowen ul li a{text-decoration:none;color:#4B4B4B;}
+.bowen ul li a:hover{text-decoration:underline;color: #C64F42;}
+
+.bowen2{ text-align:center;padding:10px; margin:0px;}
+.bowen2 ul{ margin:0 0 0px 0; overflow:hidden;}
+.bowen2 ul li{float:left; width:176px; text-align:left; line-height:26px; text-overflow:ellipsis;white-space: nowrap;overflow:hidden;}
+.bowen2 ul li a{text-decoration:none; color:#4B4B4B; background-image:url(../images/main/spbf.png); background-position:left; background-repeat:no-repeat; padding:0 0 0 18px; font-size:12px}
+.bowen2 ul li a:hover{text-decoration:underline; color: #C64F42;}
+
+.bowen2 .wz {text-decoration:none; color:#4B4B4B; background-image:url(../images/main/wz.png); background-position:left; background-repeat:no-repeat; padding:0 0 0 18px; font-size:12px}
+.bowen2 .litou {}
+
+
+.bowen4{padding:10px; height:auto; height:26px;}
+.bowen li {}
+.bowen4 a{ width:102px; color:#4B4B4B; margin-right:16px; font-size:12px; float:left;  line-height:26px; text-align:left;}
+.bowen4 a:hover{text-decoration:underline; color: #C64F42;}
+
+
+.imglist{ margin:0px; padding:0px;}
+.imglist ul{ padding:7px 10px; margin:0px;height:106px;}
+.imglist ul li{ font-size:13px; width:112px; height:96px; border:1px #FFFFFF solid;  float:left; padding:5px 2px; margin:0px; text-align:center}
+.imglist ul li img{ width:110px; height:70px; border:1px #CCCCCC solid;}
+.imglist ul li p{ margin:0px; padding:8px 0 3px 0px;}
+.imglist ul li a{ text-decoration:none;}
+.imglist ul li a:hover{ text-decoration:underline;}
+.imglist ul li:hover{background: #FFFFCC;   border:1px #CCCCCC solid;}
+/*foot lianjie and dibu excel*/
+#frilink {OVERFLOW: hidden; BORDER-TOP: #dcdcdc 1px solid; BORDER-RIGHT: #dcdcdc 1px solid; BORDER-BOTTOM: #dcdcdc 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px auto; BORDER-LEFT: #dcdcdc 1px solid; PADDING-RIGHT: 0px; WIDTH: 958px; BACKGROUND-COLOR: #ffffff;}
+#frilink span{ color: #999999; font-weight:normal; }
+.youqing{font-size:12px; text-align:left; padding:9px ; line-height:18px;}
+.youqing ul li{width:104px;float:left;padding:3px 0px 3px 0px;}
+
+#bottom{margin:10px 0px 0px 0px;}
+.foot{margin:0 auto;width:730px;text-align:center;padding:15px 0;line-height:22px;background-image: url(../images/main/mslogo.png);background-repeat: no-repeat;background-position: right 50px;color:#656565; font-family:Verdana,Arial,Tahoma;}
+.foot a{ color:#656565}
+.foot a:hover{color:#C64F42}
+
+
+/*wzliebiao excel*/
+.wzlbjj {width:702px; padding:3px 3px 3px 7px; height:auto; font-size:12px;  text-align:left; color:555; line-height:22px;}
+.wzlbjj p{ text-indent:2em; padding:0px; margin:0px;}
+.wzlblist ul{ padding:7px 10px; margin:0px;}
+.wzlblist ul li{font-size:12px;width:220px;float:left;padding:0px 0px 0px 4px;text-align:left;border:1px #CCCCCC solid;margin:0px 5px 8px 5px;height:30px;line-height:30px; overflow:hidden;}
+.wzlblist ul li span{color:#F00;}
+.wzlblist ul li a{text-decoration:none;color:#646668;}
+.wzlblist ul li a:hover{text-decoration:underline;color:#C64F42}
+/*shouye excel*/
+.syjianjie {width:705px; padding:3px 10px 3px 15px; height:auto; font-size:12px; line-height:15px; text-align:left; color:555; line-height:20px;}
+.syjianjie .syjjbt{font-size:14px; text-indent:0em;}
+.syjianjie p{ line-height:22px; text-indent:2em;}
+/*wenzhangnr excel*/
+.wzdenr {width:704px; padding:8px 13px 8px 13px; height:auto; font-size:14px; line-height:28px; text-align:left; color:555;}
+.wzbiaoti {width:100%; margin:0 auto; height:38px; line-height:38px; text-align:center;}
+.wzbiaoti h1 {margin:0; padding:0; font-size:23px;}
+.wzbiaotixia { font-size:12px; border-bottom:1px dashed #999; text-align:center; margin-bottom:12px;}
+.wzfenxiang {font-size:12px; height:60px; line-height:20px; padding:12px 20px 8px 20px; color:#646668;}
+.wzxiayiye {width:720px; ; margin:0 auto; height:30px; line-height:30px; margin:0px auto 3px auto; border-top:1px #999999 dotted;}
+.wzxiayiye span { float:left; width:50%; font-size:12px;}
+.wznirong { width:100%; height:auto;}
+.wznirong p{ line-height:26px; margin-bottom:10px; }
+
+.mbtitle{ overflow:hidden; line-height:29px; margin-top:-6px; margin-bottom:6px; height:58px;}
+.mbtitle h1{ margin:0px; padding:0px;color:#333; font-size:18px;font-family: arial,verdana,sans-serif; display:inline;}
+.mbxzan a{display: block;width: 255px;height: 50px;line-height: 50px;text-align: center;color: #fff;background: #ff3c00;font-size: 26px;margin: 18px  auto 15px auto; -webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
+.mbExcel{ color:#093;}
+
+/*wzspzhuye excel*/
+.wzspzy { padding:15px; margin:0px auto; height:230px;}
+.wzspzy .left { width:280px; float:left; }
+.wzspzy .left img{ width:369px; height:310px; padding:2px; border:1px solid #CCCCCC;}
+.wzspzy .right { width:480px; float:right; padding:6px 10px; height:auto;}
+.wzspzy p{ text-align:left; text-indent:2em; font-size:14px; line-height:26px;}
+.wzspzy .jinru { text-align:right;}
+.wzspzy .right .xiazaibt{height:40px; line-height:40px; margin-top:-6px;}
+.wzspzy .right .xiazaibt h1{ margin:0px; padding:0px;color:#000000; font-size:20px;font-family: arial,verdana,sans-serif; display:inline;}
+.wzspzy .right .xiazaibt .span2 {background:url(/excelapk/img/official-as-icon.png); display: inline-block;width: 60px;height: 25px;position: relative;top: 5px;margin: 0 6px 0 6px;}
+.wzspzy .right .xiazaibt .span3 {background:url(/excelapk/img/icon-safety-8.png); display: inline-block; margin: 0 6px;width: 26px;height: 30px;position: relative;top: 7px;}
+.wzspzy .right .pingji {height:20px; line-height:20px; padding:7px 0px;}
+.wzspzy .right .pingji .xing {display: inline-block;width: 90px;height: 17px;position: relative;top: 3px;background: url(/excelapk/img/sprites-content.jpg) 0px -600px no-repeat; list-style:none; margin:0px; padding:0px;}
+.wzspzy .right .pingji .fen {color: #ff4e00; font-weight:bold; font-size:12px; margin:0px 6px;}
+.wzspzy .right .pingji .zfen {color: #666; font-size:12px;}
+.wzspzy .right .mbtitle{text-align:center;margin:0px; padding-top:10px;}
+.wzspzy .right .fenlei {height:170px; margin:0px; padding:0px;}
+.wzspzy .right .fenlei ul {margin-left:10px; padding:0px;}
+.wzspzy .right .fenlei li {padding:0px;line-height:58px; height:48px; float:left; width:200px; font-size:14px; list-style:none;border-bottom:1px #999 dashed;}
+.wzspzy .right .xiazaian { padding:0px; margin-top:6px;}
+.wzspzy .right .xiazaian span { width:150px; padding-left:20px; float:left; height:38px; line-height:38px; text-align:inherit;}
+.wzspzy .right .xiazaian img { vertical-align:middle; margin-right:5px;}
+.wzspzy .right .xiazaian .tixin { height:22px; line-height:22px; color:#999999; width:380px; margin:3px 0px; padding:0px;}
+.wzspzy .right .xiazaian .exxzdz {font-size:14px; float:left; height:38px; line-height:38px;}
+.wzspzy .right .xiazaian .exxzdz a { margin:0 2px; color:#289613;}
+

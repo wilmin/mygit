@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appStore.dao.FilteringMapper">
+  <resultMap id="BaseResultMap" type="com.appStore.entity.Filtering">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="mac" jdbcType="VARCHAR" property="mac" />
+    <result column="filter_state" jdbcType="INTEGER" property="filterState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, model, sn, mac, filter_state
+  </sql>
+  
+  <!-- ~~~~~~~~~~~~~~begin自定义sql~~~~~~~~~~~ -->
+   <!-- 终端机型过滤拦截查询黑白名单 -->
+  <select id="getBWList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filtering
+    where model = #{model,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 查询所有白名单过滤信息 -->
+  <select id="selectByAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filtering
+  </select>
+  
+  <!-- 查询所有白名单信息总数 -->
+  <!-- <select id="countFiltering" resultType="int" >
+    select count(id) from filtering
+  </select> -->
+  
+    <!-- 查询盒子是否为白名单 -->
+ <!--  <select id="getFiltering" resultType="int" parameterType="java.lang.String">
+  	select count(id) from filtering where 1=1
+  	<if test="model != null">
+       and model = #{model}
+    </if>
+    <if test="sn != null">
+        and sn = #{sn}
+     </if>
+     <if test="mac != null">
+        and mac = #{mac}
+     </if>
+		  
+  </select> -->
+  
+  
+  <!-- ~~~~~~~~~~~~~~end自定义sql~~~~~~~~~~~ -->
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filtering
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from filtering
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.appStore.entity.Filtering">
+    insert into filtering (id, model, sn, 
+      mac, filter_state)
+    values (#{id,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, 
+      #{mac,jdbcType=VARCHAR}, #{filterState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.appStore.entity.Filtering">
+    insert into filtering
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="filterState != null">
+        filter_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="filterState != null">
+        #{filterState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.appStore.entity.Filtering">
+    update filtering
+    <set>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="filterState != null">
+        filter_state = #{filterState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.appStore.entity.Filtering">
+    update filtering
+    set model = #{model,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      filter_state = #{filterState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

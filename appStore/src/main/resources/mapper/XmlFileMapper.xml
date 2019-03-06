@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appStore.dao.XmlFileMapper">
+  <resultMap id="BaseResultMap" type="com.appStore.entity.XmlFile">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="device" jdbcType="VARCHAR" property="device" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="android" jdbcType="VARCHAR" property="android" />
+    <result column="firmware" jdbcType="VARCHAR" property="firmware" />
+    <result column="xmlurl" jdbcType="VARCHAR" property="xmlurl" />
+    <result column="s3xmlkey" jdbcType="VARCHAR" property="s3xmlkey" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="uploadtime" jdbcType="TIMESTAMP" property="uploadtime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, device, model, android, firmware, xmlurl, s3xmlkey, description, uploadtime
+  </sql>
+  <!-- ~~~~~~~~~~~~~begin自定义sql语句~~~~~~~~~~~~~ -->
+  <!-- OTA升级查询xml路径  -->
+  <select id="selectByXmlFile" parameterType="com.appStore.entity.XmlFile" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xmlfile
+    where device = #{device,jdbcType=VARCHAR}
+    and android = #{android,jdbcType=VARCHAR}
+    and firmware = #{firmware,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 查询所有OTA升级查询xml信息  -->
+  <select id="selectByXmlFilerList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xmlfile
+  </select>
+   <!-- ~~~~~~~~~~~~~end自定义sql语句~~~~~~~~~~~~~ -->
+   
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xmlfile
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xmlfile
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.appStore.entity.XmlFile">
+    insert into xmlfile (id, device, model, 
+      android, firmware, xmlurl, 
+      s3xmlkey, description, uploadtime
+      )
+    values (#{id,jdbcType=INTEGER}, #{device,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{android,jdbcType=VARCHAR}, #{firmware,jdbcType=VARCHAR}, #{xmlurl,jdbcType=VARCHAR}, 
+      #{s3xmlkey,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.appStore.entity.XmlFile">
+    insert into xmlfile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="device != null">
+        device,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="android != null">
+        android,
+      </if>
+      <if test="firmware != null">
+        firmware,
+      </if>
+      <if test="xmlurl != null">
+        xmlurl,
+      </if>
+      <if test="s3xmlkey != null">
+        s3xmlkey,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="uploadtime != null">
+        uploadtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="device != null">
+        #{device,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="android != null">
+        #{android,jdbcType=VARCHAR},
+      </if>
+      <if test="firmware != null">
+        #{firmware,jdbcType=VARCHAR},
+      </if>
+      <if test="xmlurl != null">
+        #{xmlurl,jdbcType=VARCHAR},
+      </if>
+      <if test="s3xmlkey != null">
+        #{s3xmlkey,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.appStore.entity.XmlFile">
+    update xmlfile
+    <set>
+      <if test="device != null">
+        device = #{device,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="android != null">
+        android = #{android,jdbcType=VARCHAR},
+      </if>
+      <if test="firmware != null">
+        firmware = #{firmware,jdbcType=VARCHAR},
+      </if>
+      <if test="xmlurl != null">
+        xmlurl = #{xmlurl,jdbcType=VARCHAR},
+      </if>
+      <if test="s3xmlkey != null">
+        s3xmlkey = #{s3xmlkey,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        uploadtime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.appStore.entity.XmlFile">
+    update xmlfile
+    set device = #{device,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      android = #{android,jdbcType=VARCHAR},
+      firmware = #{firmware,jdbcType=VARCHAR},
+      xmlurl = #{xmlurl,jdbcType=VARCHAR},
+      s3xmlkey = #{s3xmlkey,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      uploadtime = #{uploadtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appStore.dao.BoxMapper">
+	<resultMap id="BaseResultMap" type="com.appStore.entity.Box">
+		<id column="mac" jdbcType="VARCHAR" property="mac" />
+		<result column="sn" jdbcType="VARCHAR" property="sn" />
+		<result column="romversion" jdbcType="VARCHAR"
+			property="romversion" />
+		<result column="hardwareversion" jdbcType="VARCHAR"
+			property="hardwareversion" />
+		<result column="onlinetime" jdbcType="TIMESTAMP"
+			property="onlinetime" />
+		<result column="createtime" jdbcType="TIMESTAMP"
+			property="createtime" />
+		<result column="last_login_ip" jdbcType="VARCHAR"
+			property="lastLoginIp" />
+		<result column="firmware_version" jdbcType="VARCHAR"
+			property="firmwareVersion" />
+		<result column="android_version" jdbcType="VARCHAR"
+			property="androidVersion" />
+		<result column="language" jdbcType="VARCHAR"
+			property="language" />
+		<result column="model" jdbcType="VARCHAR" property="model" />
+		<result column="customer" jdbcType="VARCHAR"
+			property="customer" />
+		<result column="boxtype" jdbcType="VARCHAR" property="boxtype" />
+		<result column="devicedpi" jdbcType="VARCHAR"
+			property="devicedpi" />
+		<result column="productname" jdbcType="VARCHAR"
+			property="productname" />
+		<result column="factory" jdbcType="VARCHAR" property="factory" />
+		<result column="country" jdbcType="VARCHAR" property="country" />
+		<result column="brand" jdbcType="VARCHAR" property="brand" />
+		<result column="cpuserialno" jdbcType="VARCHAR"
+			property="cpuserialno" />
+		<result column="totalmemory" jdbcType="VARCHAR"
+			property="totalmemory" />
+		<result column="board" jdbcType="VARCHAR" property="board" />
+		<result column="fingerpint" jdbcType="VARCHAR"
+			property="fingerpint" />
+		<result column="device" jdbcType="VARCHAR" property="device" />
+		<result column="buildtime" jdbcType="TIMESTAMP"
+			property="buildtime" />
+		<result column="device_version_code" jdbcType="VARCHAR"
+			property="deviceVersionCode" />
+		<result column="screendensity" jdbcType="VARCHAR"
+			property="screendensity" />
+		<result column="cpu_name" jdbcType="VARCHAR" property="cpuName" />
+		<result column="freememory" jdbcType="VARCHAR"
+			property="freememory" />
+		<result column="buildversion" jdbcType="VARCHAR"
+			property="buildversion" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		mac, sn, romversion, hardwareversion, onlinetime,
+		createtime,
+		last_login_ip, firmware_version,
+		android_version, language,
+		model, customer, boxtype, devicedpi, productname, factory,
+		country,
+		brand, cpuserialno, totalmemory, board, fingerpint, device,
+		buildtime,
+		device_version_code,
+		screendensity, cpu_name, freememory, buildversion
+	</sql>
+
+	<!-- ~~~~~~~~~~~~begin自定义sql~~~~~~~~~~~~ -->
+	<!-- 定时删除一个月前的所有数据 -->
+	<delete id="deleteByOneMonth" >
+		delete from box where onlinetime &lt; date_add(curdate(),INTERVAL -1 month)
+	</delete>
+	
+	<!-- 查询所有访问服务器的设备信息 -->
+	<select id="selectBoxWithFilter" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from box
+		order by onlinetime desc
+	</select>
+	<!-- 查询盒子是否已注册 -->
+	<select id="selectMacSn" resultType="com.appStore.entity.Box"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from box
+		where sn=#{sn,jdbcType=VARCHAR}
+		<if test="mac != null">
+			and mac = #{mac,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<!-- OTA接口访问服务器记录修改信息 -->
+	<update id="updateByOTAPrimaryKeySelective"
+		parameterType="com.appStore.entity.Box">
+		update box
+		<set>
+			<if test="romversion != null">
+				romversion = #{romversion,jdbcType=VARCHAR},
+			</if>
+			<if test="hardwareversion != null">
+				hardwareversion = #{hardwareversion,jdbcType=VARCHAR},
+			</if>
+			<if test="onlinetime != null">
+				onlinetime = #{onlinetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastLoginIp != null">
+				last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="firmwareVersion != null">
+				firmware_version = #{firmwareVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="androidVersion != null">
+				android_version = #{androidVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="language != null">
+				language = #{language,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				model = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="customer != null">
+				customer = #{customer,jdbcType=VARCHAR},
+			</if>
+			<if test="boxtype != null">
+				boxtype = #{boxtype,jdbcType=VARCHAR},
+			</if>
+			<if test="devicedpi != null">
+				devicedpi = #{devicedpi,jdbcType=VARCHAR},
+			</if>
+			<if test="productname != null">
+				productname = #{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				factory = #{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				country = #{country,jdbcType=VARCHAR},
+			</if>
+			<if test="brand != null">
+				brand = #{brand,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuserialno != null">
+				cpuserialno = #{cpuserialno,jdbcType=VARCHAR},
+			</if>
+			<if test="totalmemory != null">
+				totalmemory = #{totalmemory,jdbcType=VARCHAR},
+			</if>
+			<if test="board != null">
+				board = #{board,jdbcType=VARCHAR},
+			</if>
+			<if test="fingerpint != null">
+				fingerpint = #{fingerpint,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				device = #{device,jdbcType=VARCHAR},
+			</if>
+			<if test="buildtime != null">
+				buildtime = #{buildtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deviceVersionCode != null">
+				device_version_code =
+				#{deviceVersionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="screendensity != null">
+				screendensity = #{screendensity,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuName != null">
+				cpu_name = #{cpuName,jdbcType=VARCHAR},
+			</if>
+			<if test="freememory != null">
+				freememory = #{freememory,jdbcType=VARCHAR},
+			</if>
+			<if test="buildversion != null">
+				buildversion = #{buildversion,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where sn = #{sn,jdbcType=VARCHAR}
+	</update>
+
+	<!-- ~~~~~~~~~~~~end自定义sql~~~~~~~~~~~~ -->
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from box
+		where mac = #{mac,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from box
+		where mac = #{mac,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.appStore.entity.Box">
+		insert into box (mac, sn,
+		romversion,
+		hardwareversion, onlinetime, createtime,
+		last_login_ip,
+		firmware_version, android_version,
+		language, model, customer,
+		boxtype,
+		devicedpi, productname,
+		factory, country, brand,
+		cpuserialno,
+		totalmemory, board,
+		fingerpint, device, buildtime,
+		device_version_code,
+		screendensity, cpu_name,
+		freememory, buildversion)
+		values
+		(#{mac,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR},
+		#{romversion,jdbcType=VARCHAR},
+		#{hardwareversion,jdbcType=VARCHAR},
+		#{onlinetime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP},
+		#{lastLoginIp,jdbcType=VARCHAR}, #{firmwareVersion,jdbcType=VARCHAR},
+		#{androidVersion,jdbcType=VARCHAR},
+		#{language,jdbcType=VARCHAR},
+		#{model,jdbcType=VARCHAR}, #{customer,jdbcType=VARCHAR},
+		#{boxtype,jdbcType=VARCHAR}, #{devicedpi,jdbcType=VARCHAR},
+		#{productname,jdbcType=VARCHAR},
+		#{factory,jdbcType=VARCHAR},
+		#{country,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},
+		#{cpuserialno,jdbcType=VARCHAR}, #{totalmemory,jdbcType=VARCHAR},
+		#{board,jdbcType=VARCHAR},
+		#{fingerpint,jdbcType=VARCHAR},
+		#{device,jdbcType=VARCHAR}, #{buildtime,jdbcType=TIMESTAMP},
+		#{deviceVersionCode,jdbcType=VARCHAR},
+		#{screendensity,jdbcType=VARCHAR}, #{cpuName,jdbcType=VARCHAR},
+		#{freememory,jdbcType=VARCHAR}, #{buildversion,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.appStore.entity.Box">
+		insert into box
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="sn != null">
+				sn,
+			</if>
+			<if test="romversion != null">
+				romversion,
+			</if>
+			<if test="hardwareversion != null">
+				hardwareversion,
+			</if>
+			<if test="onlinetime != null">
+				onlinetime,
+			</if>
+			<if test="createtime != null">
+				createtime,
+			</if>
+			<if test="lastLoginIp != null">
+				last_login_ip,
+			</if>
+			<if test="firmwareVersion != null">
+				firmware_version,
+			</if>
+			<if test="androidVersion != null">
+				android_version,
+			</if>
+			<if test="language != null">
+				language,
+			</if>
+			<if test="model != null">
+				model,
+			</if>
+			<if test="customer != null">
+				customer,
+			</if>
+			<if test="boxtype != null">
+				boxtype,
+			</if>
+			<if test="devicedpi != null">
+				devicedpi,
+			</if>
+			<if test="productname != null">
+				productname,
+			</if>
+			<if test="factory != null">
+				factory,
+			</if>
+			<if test="country != null">
+				country,
+			</if>
+			<if test="brand != null">
+				brand,
+			</if>
+			<if test="cpuserialno != null">
+				cpuserialno,
+			</if>
+			<if test="totalmemory != null">
+				totalmemory,
+			</if>
+			<if test="board != null">
+				board,
+			</if>
+			<if test="fingerpint != null">
+				fingerpint,
+			</if>
+			<if test="device != null">
+				device,
+			</if>
+			<if test="buildtime != null">
+				buildtime,
+			</if>
+			<if test="deviceVersionCode != null">
+				device_version_code,
+			</if>
+			<if test="screendensity != null">
+				screendensity,
+			</if>
+			<if test="cpuName != null">
+				cpu_name,
+			</if>
+			<if test="freememory != null">
+				freememory,
+			</if>
+			<if test="buildversion != null">
+				buildversion,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="sn != null">
+				#{sn,jdbcType=VARCHAR},
+			</if>
+			<if test="romversion != null">
+				#{romversion,jdbcType=VARCHAR},
+			</if>
+			<if test="hardwareversion != null">
+				#{hardwareversion,jdbcType=VARCHAR},
+			</if>
+			<if test="onlinetime != null">
+				#{onlinetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastLoginIp != null">
+				#{lastLoginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="firmwareVersion != null">
+				#{firmwareVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="androidVersion != null">
+				#{androidVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="language != null">
+				#{language,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="customer != null">
+				#{customer,jdbcType=VARCHAR},
+			</if>
+			<if test="boxtype != null">
+				#{boxtype,jdbcType=VARCHAR},
+			</if>
+			<if test="devicedpi != null">
+				#{devicedpi,jdbcType=VARCHAR},
+			</if>
+			<if test="productname != null">
+				#{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				#{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				#{country,jdbcType=VARCHAR},
+			</if>
+			<if test="brand != null">
+				#{brand,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuserialno != null">
+				#{cpuserialno,jdbcType=VARCHAR},
+			</if>
+			<if test="totalmemory != null">
+				#{totalmemory,jdbcType=VARCHAR},
+			</if>
+			<if test="board != null">
+				#{board,jdbcType=VARCHAR},
+			</if>
+			<if test="fingerpint != null">
+				#{fingerpint,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				#{device,jdbcType=VARCHAR},
+			</if>
+			<if test="buildtime != null">
+				#{buildtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deviceVersionCode != null">
+				#{deviceVersionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="screendensity != null">
+				#{screendensity,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuName != null">
+				#{cpuName,jdbcType=VARCHAR},
+			</if>
+			<if test="freememory != null">
+				#{freememory,jdbcType=VARCHAR},
+			</if>
+			<if test="buildversion != null">
+				#{buildversion,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.appStore.entity.Box">
+		update box
+		<set>
+			<if test="sn != null">
+				sn = #{sn,jdbcType=VARCHAR},
+			</if>
+			<if test="romversion != null">
+				romversion = #{romversion,jdbcType=VARCHAR},
+			</if>
+			<if test="hardwareversion != null">
+				hardwareversion = #{hardwareversion,jdbcType=VARCHAR},
+			</if>
+			<if test="onlinetime != null">
+				onlinetime = #{onlinetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastLoginIp != null">
+				last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="firmwareVersion != null">
+				firmware_version = #{firmwareVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="androidVersion != null">
+				android_version = #{androidVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="language != null">
+				language = #{language,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				model = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="customer != null">
+				customer = #{customer,jdbcType=VARCHAR},
+			</if>
+			<if test="boxtype != null">
+				boxtype = #{boxtype,jdbcType=VARCHAR},
+			</if>
+			<if test="devicedpi != null">
+				devicedpi = #{devicedpi,jdbcType=VARCHAR},
+			</if>
+			<if test="productname != null">
+				productname = #{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="factory != null">
+				factory = #{factory,jdbcType=VARCHAR},
+			</if>
+			<if test="country != null">
+				country = #{country,jdbcType=VARCHAR},
+			</if>
+			<if test="brand != null">
+				brand = #{brand,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuserialno != null">
+				cpuserialno = #{cpuserialno,jdbcType=VARCHAR},
+			</if>
+			<if test="totalmemory != null">
+				totalmemory = #{totalmemory,jdbcType=VARCHAR},
+			</if>
+			<if test="board != null">
+				board = #{board,jdbcType=VARCHAR},
+			</if>
+			<if test="fingerpint != null">
+				fingerpint = #{fingerpint,jdbcType=VARCHAR},
+			</if>
+			<if test="device != null">
+				device = #{device,jdbcType=VARCHAR},
+			</if>
+			<if test="buildtime != null">
+				buildtime = #{buildtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deviceVersionCode != null">
+				device_version_code =
+				#{deviceVersionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="screendensity != null">
+				screendensity = #{screendensity,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuName != null">
+				cpu_name = #{cpuName,jdbcType=VARCHAR},
+			</if>
+			<if test="freememory != null">
+				freememory = #{freememory,jdbcType=VARCHAR},
+			</if>
+			<if test="buildversion != null">
+				buildversion = #{buildversion,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where mac = #{mac,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.appStore.entity.Box">
+		update box
+		set sn = #{sn,jdbcType=VARCHAR},
+		romversion =
+		#{romversion,jdbcType=VARCHAR},
+		hardwareversion =
+		#{hardwareversion,jdbcType=VARCHAR},
+		onlinetime =
+		#{onlinetime,jdbcType=TIMESTAMP},
+		createtime =
+		#{createtime,jdbcType=TIMESTAMP},
+		last_login_ip =
+		#{lastLoginIp,jdbcType=VARCHAR},
+		firmware_version =
+		#{firmwareVersion,jdbcType=VARCHAR},
+		android_version =
+		#{androidVersion,jdbcType=VARCHAR},
+		language =
+		#{language,jdbcType=VARCHAR},
+		model = #{model,jdbcType=VARCHAR},
+		customer = #{customer,jdbcType=VARCHAR},
+		boxtype =
+		#{boxtype,jdbcType=VARCHAR},
+		devicedpi = #{devicedpi,jdbcType=VARCHAR},
+		productname = #{productname,jdbcType=VARCHAR},
+		factory =
+		#{factory,jdbcType=VARCHAR},
+		country = #{country,jdbcType=VARCHAR},
+		brand = #{brand,jdbcType=VARCHAR},
+		cpuserialno =
+		#{cpuserialno,jdbcType=VARCHAR},
+		totalmemory =
+		#{totalmemory,jdbcType=VARCHAR},
+		board = #{board,jdbcType=VARCHAR},
+		fingerpint = #{fingerpint,jdbcType=VARCHAR},
+		device =
+		#{device,jdbcType=VARCHAR},
+		buildtime =
+		#{buildtime,jdbcType=TIMESTAMP},
+		device_version_code =
+		#{deviceVersionCode,jdbcType=VARCHAR},
+		screendensity =
+		#{screendensity,jdbcType=VARCHAR},
+		cpu_name =
+		#{cpuName,jdbcType=VARCHAR},
+		freememory =
+		#{freememory,jdbcType=VARCHAR},
+		buildversion =
+		#{buildversion,jdbcType=VARCHAR}
+		where mac = #{mac,jdbcType=VARCHAR}
+	</update>
+</mapper>

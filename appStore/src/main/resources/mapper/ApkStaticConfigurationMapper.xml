@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appStore.dao.ApkStaticConfigurationMapper">
+  <resultMap id="BaseResultMap" type="com.appStore.entity.ApkStaticConfiguration">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="model_version_id" jdbcType="INTEGER" property="modelVersionId" />
+    <result column="app_upgrade_id" jdbcType="INTEGER" property="appUpgradeId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, model_version_id, app_upgrade_id, status
+  </sql>
+  
+  <!-- ~~~~~~~~~~~~~begin自定义sql~~~~~~~~~~~~~~~ -->
+  <!-- 查询静默安装推送的APP升级集合-->
+  <select id="selectByApkStaticList" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from apk_static_configuration
+  </select>
+  
+  <!-- 查询状态通过的静默安装策略信息 -->
+  <select id="selectByApkStaticStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from apk_static_configuration
+    where model_version_id = #{id,jdbcType=INTEGER}
+  </select>
+  
+ 
+  <!-- ~~~~~~~~~~~~~end自定义sql~~~~~~~~~~~~~~~ -->  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from apk_static_configuration
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from apk_static_configuration
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.appStore.entity.ApkStaticConfiguration">
+    insert into apk_static_configuration (id, model_version_id, app_upgrade_id, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{modelVersionId,jdbcType=INTEGER}, #{appUpgradeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.appStore.entity.ApkStaticConfiguration">
+    insert into apk_static_configuration
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="modelVersionId != null">
+        model_version_id,
+      </if>
+      <if test="appUpgradeId != null">
+        app_upgrade_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modelVersionId != null">
+        #{modelVersionId,jdbcType=INTEGER},
+      </if>
+      <if test="appUpgradeId != null">
+        #{appUpgradeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.appStore.entity.ApkStaticConfiguration">
+    update apk_static_configuration
+    <set>
+      <if test="modelVersionId != null">
+        model_version_id = #{modelVersionId,jdbcType=INTEGER},
+      </if>
+      <if test="appUpgradeId != null">
+        app_upgrade_id = #{appUpgradeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.appStore.entity.ApkStaticConfiguration">
+    update apk_static_configuration
+    set model_version_id = #{modelVersionId,jdbcType=INTEGER},
+      app_upgrade_id = #{appUpgradeId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
