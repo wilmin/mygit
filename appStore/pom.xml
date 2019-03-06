@@ -17,6 +17,7 @@
 	<!--改为war方式 -->
 	<packaging>war</packaging>
 
+	<!-- 测试git分支提交 -->
 	<name>appStore</name>
 	<description>Demo project for Spring Boot</description>
 
